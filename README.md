@@ -112,7 +112,7 @@ The webview URL should look like the following:
 TrueMoney payment service webview
 
 ```
-https://local-channel-gateway-staging.dev.truemoney.com.kh/retail-payment/view/paymentcode?client_id=(Merchant Client ID)&access_token=(Access Token)&payment_info=(Payment Info URL Encoded)&(Signature URL Encoded)&timestamp=(Timestamp used to generate Signature)
+https://local-channel-gateway-staging.dev.truemoney.com.kh/retail-payment/view/paymentcode?client_id=(Merchant Client ID)&access_token=(Access Token)&payment_info=(Payment Info URL Encoded)&signature=(Signature URL Encoded)&timestamp=(Timestamp used to generate Signature)
 ```
 
 ## Error Appendix
