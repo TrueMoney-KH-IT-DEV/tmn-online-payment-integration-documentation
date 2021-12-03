@@ -18,7 +18,7 @@ To start Merchant will need to obtain access token using Client ID and Secret.
 
 **Base URL** https://local-channel-gateway-staging.dev.truemoney.com.kh
 
-**POST** /mms-api-gateway/token
+**POST** /mms-api-gateway/merchants/token
 
 
 Headers:
@@ -51,49 +51,6 @@ Response:
 ```
 Save the access token safely and then make another request to get the signature for the payment transaction.
 
-POST third-party-spi-qa/test/7-11/sign
-
-Headers:
-
-```
-Content-Type: application/json
-Timestamp: (Timestamp)
-env: qa
-partnerType: 711
-service: retail
-```
-
-Body (JSON):
-
-```
-{
-    "external_ref_id": (Reference ID),
-    "amount": (Amount),
-    "currency": (Currency),
-    "user_type": (User Type),
-    "description": (Description),
-    "metadata": {
-        "store_id": (Store ID),
-        "terminal_type": (Terminal Type)
-    }
-}
-```
-
-Response:
-
-```
-{
-    "status": {
-        "code": "success",
-        "message": "success",
-        "messageKh": "success"
-    },
-    "traceId": (Trace ID),
-    "data": {
-        "signature": (Signature)
-    }
-}
-```
 
 Save the signature and the payment information and perform URL encoding on both of them.
 
