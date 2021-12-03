@@ -23,7 +23,7 @@ To get the access token you will have call the following API:
 
 Base URL `https://local-channel-gateway-staging.dev.truemoney.com.kh`
 
-POST `/mms-api-gateway/token`
+POST `/mms-api-gateway/merchants/token`
 
 Headers:
 
