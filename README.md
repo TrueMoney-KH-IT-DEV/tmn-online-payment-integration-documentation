@@ -58,7 +58,7 @@ Then you will need to generate a signature for the payment information using the
 To generate the signature:
 
  1. Prepare the content in following format: 	
-	 ```(timestamp_in_epoch_time_in_second){"external_ref_id":(Reference ID),"amount":(Amount),"currency":(Currency),"user_type":(User Type),"description":(Description),"metadata":{"store_id":(Store ID),"terminal_type":(Terminal Type)}}``` all in a single line
+	 ```(timestamp_in_epoch_time_in_second){"external_ref_id":(Reference ID),"amount":(Amount),"currency":(Currency),"user_type":(User Type),"description":(Description),"metadata":{"store_id":(Store ID),"terminal_type":(Terminal Type)}}``` all in a single line with no space
 	 
  2. Hash the content with SHA-256 using the private key
 	 ```RSA-SHA256(content)```
