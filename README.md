@@ -1,6 +1,10 @@
-# TrueMoney Online Payment Merchant Integration Documentation
+# Welcome to TrueMoney's Online Payment Merchant Integration Documentation
 
-API Documentation for Merchant Integration with TrueMoney Online Payment Service.
+You will find all the necessary information and references here to help you enable TrueMoney wallet as one of your payment methods on your website and/mobile applications.
+
+
+
+TrueMoney offers a secure testing environment which mimics the Live Production enviornment, which allows you to test your integration without any impact of financial loss or anything else.
 
 ## Content
 
