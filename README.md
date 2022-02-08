@@ -32,8 +32,8 @@ You will need to provide the following information to TrueMoney so that they set
 
 After you provide all the information above, TrueMoney team will set up the merchant profile for you and they will provide you the following credentials (necessary for step [2.Technical Integration](https://github.com/TrueMoney-KH-IT-DEV/tmn-online-payment-integration-documentation/edit/main/README.md#2-technical-integration)):
 
-- _Client Id_
-- _Client Secret_
+- _Merchant Client Id_
+- _Merchant Client Secret_
 - _Private Key_
 
 
@@ -44,38 +44,37 @@ Use the test credentials provided to you above and start integrating and testing
 
 In order to access TrueMoney's Online Payment service, first you need to obtain access token. To get it, you will have call the following API:
 
-Base URL `https://local-channel-gateway-staging.dev.truemoney.com.kh`
+- Base URL: `https://local-channel-gateway-staging.dev.truemoney.com.kh`
 
-POST `/mms-api-gateway/merchants/token`
+- Request:
+	- POST `/mms-api-gateway/merchants/token`
+	- Headers:
+	
+		```
+		Content-Type: application/x-www-form-urlencoded
+		client_id: (Merchant Client ID)
+		```
+	- Body (x-www-form-urlencoded):
 
-Headers:
+		```
+		grant_type:client_credentials
+		client_id:(Merchant Client ID)
+		client_secret:(Merchant Client Secret)
+		```
+- Response:
 
-```
-Content-Type: application/x-www-form-urlencoded
-client_id: (Merchant Client ID)
-```
-
-Body (x-www-form-urlencoded):
-
-```
-grant_type:client_credentials
-client_id:(Merchant Client ID)
-client_secret:(Merchant Client Secret)
-```
-Response:
-
-```
-{
-    "access_token": (Access Token),
-    "expires_in": 3600,
-    "refresh_expires_in": 0,
-    "refresh_token": (Refresh Token),
-    "token_type": "bearer",
-    "not-before-policy": 0,
-    "session_state": (Session State),
-    "scope": "create"
-}
-```
+	```
+	{
+    		"access_token": (Access Token),
+    		"expires_in": 3600,
+    		"refresh_expires_in": 0,
+    		"refresh_token": (Refresh Token),
+    		"token_type": "bearer",
+    		"not-before-policy": 0,
+    		"session_state": (Session State),
+    		"scope": "create"
+	}
+	```
 Save the access token safely.
 
 ### 2.2. Signature Generation
