@@ -1,29 +1,48 @@
-# Welcome to TrueMoney's Online Payment Merchant Integration Documentation
+# Welcome to TrueMoney Pay Integration Documentation
 
 You will find all the necessary information and references here to help you enable TrueMoney wallet as one of your payment methods on your website and/mobile applications.
 
-
-
 TrueMoney offers a secure testing environment which mimics the Live Production enviornment, which allows you to test your integration without any impact of financial loss or anything else.
 
-## Content
+# Getting Started
 
- - Prerequisite
- - Instructions
- - Error Appendix
+## 1. Register for a Merchant Profile
+You will need to provide the following information to TrueMoney so that they set up a merchant profile for you:
 
-## Prerequisite
-Items to be provided by TrueMoney:
- 
+### Basic Information
+- Short Name
+- Name
+- Phone number
+- Email (optional)
+- Address (optional)
+- Latitude & Longitude (optional)
 
- 1. Merchant Client ID
- 2. Merchant Client Secret
- 3. Merchant Private Key
+### Business Nature
+- Business Type: { _Individual | Corporate_ }
+- Business Category:
+- Commercial Registered Name (optional)
+- Commercial Registration Number (optional)
+- Payment Currency { _USD | KHR | Both_ }
 
-## Instructions
+### Bank Details
+- Bank Account Type: { _Current | Savings_ } Account (optional)
+- Bank Name (optional)
+- Bank Account Number (optional)
+- Bank Account Name (optional)
 
-Before accessing the TrueMoney payment service webview first you will need to obtain access token.
-To get the access token you will have call the following API:
+After you provide all the information above, TrueMoney team will set up the merchant profile for you and they will provide you the following credentials (necessary for step [2.Technical Integration](https://github.com/TrueMoney-KH-IT-DEV/tmn-online-payment-integration-documentation/edit/main/README.md#2-technical-integration)):
+
+- _Client Id_
+- _Client Secret_
+- _Private Key_
+
+
+## 2. Technical Integration
+Use the test credentials provided to you above and start integrating and testing from your application.
+
+### 2.1. Access Token Generation
+
+In order to access TrueMoney's Online Payment service, first you need to obtain access token. To get it, you will have call the following API:
 
 Base URL `https://local-channel-gateway-staging.dev.truemoney.com.kh`
 
@@ -58,7 +77,11 @@ Response:
 }
 ```
 Save the access token safely.
+
+### 2.2. Signature Generation
+
 Then you will need to generate a signature for the payment information using the provided private key.
+
 To generate the signature:
 
  1. Prepare the content in following format: 	
