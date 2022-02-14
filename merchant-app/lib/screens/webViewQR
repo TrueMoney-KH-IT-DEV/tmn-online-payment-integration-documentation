@@ -1,0 +1,20 @@
+
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:provider_shopper/models/cart.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+
+class WebViewQR extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Flutter WebView example'),
+      ),
+      body: const WebView(
+        initialUrl: 'tmncustomerkhtest://merchant_payment',
+        javascriptMode: JavascriptMode.unrestricted,
+      ),
+    );
+  }
+}
