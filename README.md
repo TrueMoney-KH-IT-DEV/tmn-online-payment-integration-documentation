@@ -1,66 +1,92 @@
-# TrueMoney Online Payment Merchant Integration Documentation
+# Welcome to TrueMoney Pay Integration Documentation
 
-API Documentation for Merchant Integration with TrueMoney Online Payment Service.
+You will find all the necessary information and references here to help you enable TrueMoney wallet as one of your payment methods on your website and/mobile applications.
 
-## Content
+TrueMoney offers a secure testing environment which mimics the Live Production enviornment, which allows you to test your integration without any impact of financial loss or anything else.
 
- - Prerequisite
- - Instructions
- - Error Appendix
+# Getting Started
 
-## Prerequisite
-Items to be provided by TrueMoney:
- 
+## 1. Register for a Merchant Profile
+You will need to provide the following information to TrueMoney so that they set up a merchant profile for you:
 
- 1. Merchant Client ID
- 2. Merchant Client Secret
- 3. Merchant Private Key
+### Basic Information
+- Short Name
+- Name
+- Phone number
+- Email (optional)
+- Address (optional)
+- Latitude & Longitude (optional)
 
-## Instructions
+### Business Nature
+- Business Type: { _Individual | Corporate_ }
+- Business Category:
+- Commercial Registered Name (optional)
+- Commercial Registration Number (optional)
+- Payment Currency { _USD | KHR | Both_ }
 
-Before accessing the TrueMoney payment service webview first you will need to obtain access token.
-To get the access token you will have call the following API:
+### Bank Details
+- Bank Account Type: { _Current | Savings_ } Account (optional)
+- Bank Name (optional)
+- Bank Account Number (optional)
+- Bank Account Name (optional)
 
-Base URL `https://local-channel-gateway-staging.dev.truemoney.com.kh`
+After you provide all the information above, TrueMoney team will set up the merchant profile for you and they will provide you the following credentials (necessary for step [2.Technical Integration](https://github.com/TrueMoney-KH-IT-DEV/tmn-online-payment-integration-documentation/edit/main/README.md#2-technical-integration)):
 
-POST `/mms-api-gateway/merchants/token`
+- _Merchant Client Id_
+- _Merchant Client Secret_
+- _Private Key_
 
-Headers:
 
-```
-Content-Type: application/x-www-form-urlencoded
-client_id: (Merchant Client ID)
-```
+## 2. Technical Integration
+Use the test credentials provided to you above and start integrating and testing from your application.
 
-Body (x-www-form-urlencoded):
+### 2.1. Access Token Generation
 
-```
-grant_type:client_credentials
-client_id:(Merchant Client ID)
-client_secret:(Merchant Client Secret)
-```
-Response:
+In order to access TrueMoney's Online Payment service, first you need to obtain access token. To get it, you will have call the following API:
 
-```
-{
-    "access_token": (Access Token),
-    "expires_in": 3600,
-    "refresh_expires_in": 0,
-    "refresh_token": (Refresh Token),
-    "token_type": "bearer",
-    "not-before-policy": 0,
-    "session_state": (Session State),
-    "scope": "create"
-}
-```
+- Base URL: `https://local-channel-gateway-staging.dev.truemoney.com.kh`
+
+- Request:
+	- POST `/mms-api-gateway/merchants/token`
+	- Headers:
+	
+		```
+		Content-Type: application/x-www-form-urlencoded
+		client_id: (Merchant Client ID)
+		```
+	- Body (x-www-form-urlencoded):
+
+		```
+		grant_type:client_credentials
+		client_id:(Merchant Client ID)
+		client_secret:(Merchant Client Secret)
+		```
+- Response:
+
+	```
+	{
+    		"access_token": (Access Token),
+    		"expires_in": 3600,
+    		"refresh_expires_in": 0,
+    		"refresh_token": (Refresh Token),
+    		"token_type": "bearer",
+    		"not-before-policy": 0,
+    		"session_state": (Session State),
+    		"scope": "create"
+	}
+	```
 Save the access token safely.
+
+### 2.2. Signature Generation
+
 Then you will need to generate a signature for the payment information using the provided private key.
+
 To generate the signature:
 
  1. Prepare the content in following format: 	
 	 ```(timestamp_in_epoch_time_in_second){"external_ref_id":(Reference ID),"amount":(Amount),"currency":(Currency),"user_type":(User Type),"description":(Description),"metadata":{"store_id":(Store ID),"terminal_type":(Terminal Type)}}``` all in a single line with no space
 	 
- 2. Hash the content with SHA-256 using the private key
+ 2. Hash the content with RSA-SHA256 using the private key
 	 ```RSA-SHA256(content)```
 	 
  3. Covert hashed content to Base64
