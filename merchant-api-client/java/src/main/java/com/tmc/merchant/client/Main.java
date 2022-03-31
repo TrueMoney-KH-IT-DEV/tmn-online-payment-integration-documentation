@@ -22,12 +22,12 @@ import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter;
 
 public class Main {
 
-	private static final String PRIVATE_KEY = 
+	static final String PRIVATE_KEY = 
 			"-----BEGIN RSA PRIVATE KEY-----\r\n" + 
 			"MIICXQIBAAKBgQDFfwCZ/5PdBcdRMKlaEtby9XYMwlwqQ7uTtPBx8443JDaLcfKvERc+gYj/SZCo6TbiSnYyxJCtgfkGsN4lZE8nGSZ2cuflnRN+9fDT+4tqzr3pYa02EvPl6tnhJh3y52AVjxry2HCsBMoMb4N9S3Iq8Z3R5vGTuCPitasdm0oy2wIDAQABAoGBAILDFCLilYRBzzZyga6hyrAS1ZadGWjib8/cfVb1a7QWxgaN66D+L+Wy3oIosx8jSrOJmbkDbMd0xu0nLe6T+9M73r+QfmEP4BZQt0bM8ZI+vbMkIskr8svvuZ+gGQ1XTtY4BsTOEcbMITdBPxyWgqmDQpS/Drjf08XRqUpVdeABAkEA+jb75Zj3DzZVMchUVlClkV2dz7BYBrZ0/c6GP1Fndt06x6ThiuG5yGq31c/h3cGKswoS0OI4Mxx/SZJz8/OiIQJBAMoP+kX1JxtzNxI8v88vovjwnU5FeSWPzTrLE2MQ/xJTxBVzEM1s10BKKnxOnfGoslVZdRITLlAXx6NSpSFLrXsCQAnWuab4kdZuS4FOoEpYl3oU1UzCYWO6LvV/9nVs7QWWg2YwTJIaeCSyVZI5v2bp4ltR7RV7n7waxcKN2LNiBCECQEuxLImkSiAISur0As40BBLI38SAVd9yPOj3Ra3oogRViLCYSAUL7p5QqhWixZvPG+7I8gfxU3oBTnGp9d3BIZ0CQQCwZQcasgjv8o1dp44oLkVr5Pt3c4wwjwaG8d4hUcMJK57N0+/1mn1KYm0f7klJe24if613nBk2VCBKq2ypXaRf\r\n" + 
 			"-----END RSA PRIVATE KEY-----";
 	
-	private static final String EXPECTED_SIGNATURE =
+	static final String EXPECTED_SIGNATURE =
 			"uEAjvXj1YqJBPp15cEjJoPQSSMxx3jWyXMK8+XaOxOT/O+DFxAVKtnXZ+Xk8D8R8z3/KJXxwsoSQeWemBfBdr6OCCvBxEyAo5BTmxdM8XsElZm88yrHzGVv3BvFVuasZyfDoX8XsHX3QBi8qG+8y9Q/pY/BWToQRn+gD1z/+fbc=";
 	
 	public static void main(String[] args) throws Exception {
@@ -50,7 +50,7 @@ public class Main {
 		return provider;
 	}
 	
-	public static KeyPair getKeyPair(String str) throws IOException {
+	static KeyPair getKeyPair(String str) throws IOException {
 		Provider provider = getBC();
 		StringReader stringReader = new StringReader(str);
 		PEMParser pemParser = new PEMParser(stringReader);
@@ -60,7 +60,7 @@ public class Main {
 		return converter.getKeyPair((PEMKeyPair) object);
 	}
 
-	public static String sign(String payload, PrivateKey privateKey) throws InvalidKeyException, NoSuchAlgorithmException, SignatureException, UnsupportedEncodingException {
+	static String sign(String payload, PrivateKey privateKey) throws InvalidKeyException, NoSuchAlgorithmException, SignatureException, UnsupportedEncodingException {
 		Signature privateSignature = Signature.getInstance("SHA256withRSA");
 		privateSignature.initSign(privateKey);
 		privateSignature.update(payload.getBytes("UTF-8"));
